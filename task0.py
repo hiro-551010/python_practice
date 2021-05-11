@@ -17,10 +17,10 @@ for obj in name:
     print(obj)
 
 # --- 5 ---
-def hello():
-    print('hello')
+def names():
+    print('ねずこ')
 
-hello()
+names()
 
 # --- 6 ---
 def character(character):
