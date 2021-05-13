@@ -4,6 +4,9 @@ import time
 import pandas as pd
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Chromeを起動する関数
 
@@ -38,7 +41,8 @@ def main():
     # Webサイトを開く
     driver.get("https://tenshoku.mynavi.jp/")
     time.sleep(5)
- 
+    
+    wait = WebDriverWait(driver, 10)
     try:
         # ポップアップを閉じる
         driver.execute_script('document.querySelector(".karte-close").click()')
@@ -55,21 +59,43 @@ def main():
     # 検索ボタンクリック
     driver.find_element_by_class_name("topSearch__button").click()
 
-    # ページ終了まで繰り返し取得
-    exp_name_list = []
-    # 検索結果の一番上の会社名を取得
-    name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
+    """ 課題2-1
+    name_list = driver.find_element_by_class_name("cassetteRecruit__name")
+    exp_name_list.append(name_list.text)
+    print(name_list.text)
+    """
+    
+    path = './task2.csv'
+    file = pd.read_csv(path)
+    exp_name_list = list(file['company'])
+    next_page_link = []
 
-    # 1ページ分繰り返し
-    print(len(name_list))
+    while True:
+        name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
+        for name in name_list:
+            try:
+                for name in name_list:
+                    exp_name_list.append(name.text)
+            except:
+                Chrome.close
 
-    for name in name_list:
-        exp_name_list.append(name.text)
-        print(name.text)
+        next_page = wait.until(EC.visibility_of_element_located((By.CLASS_NAME,"iconFont--arrowLeft")))
+        next_page_link.append(next_page)
+        if len(next_page_link) >= 1:
+            next_page_url = next_page_link[0].get_attribute("href")
+            driver.get(next_page_url)
+        else:
+            print('終わりました')
+            break
 
 
-            
-        
+    df = pd.DataFrame(data=exp_name_list, columns=['company'])
+    df.to_csv(path, mode='w', encoding='utf-8')
+
+
+    # --- 課題2-2 ---
+    print(df.head(3))
+
 # 直接起動された場合はmain()を起動(モジュールとして呼び出された場合は起動しないようにするため)
 if __name__ == "__main__":
     main()
