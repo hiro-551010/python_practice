@@ -8,7 +8,7 @@ def search():
         name = input('名前を入れてください')
         if name in source:
             print('{}を見つけました'.format(name))
-            print('source')
+            print(source)
         else:
             source.append(name)
             print('{}を保存しました'.format(name))
