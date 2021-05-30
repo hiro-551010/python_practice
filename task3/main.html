@@ -9,15 +9,16 @@
 </head>
 <body>
     <div class="container">
-        <input type="text">
-        <input type="submit" value="送信">
+        csvファイルの名前<input type="text" id="csv_name">
+        名前の検索<input type="text" id="name">
+        <button id="search">検索</button>
     </div>
     <script type="text/javascript" src="./eel.js"></script>
     <script>
-        eel.expose(search);
-        function search() {
-
-        }
+        search.addEventListener('click', () =>{
+            eel.search(name.value, csv_name.value);
+            console.log('渡されました');
+        })
     </script>
 </body>
 </html>
