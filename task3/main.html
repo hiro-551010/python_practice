@@ -10,15 +10,17 @@
 <body>
     <div class="container">
         csvファイルの名前<input type="text" id="csv_name">
-        名前の検索<input type="text" id="name">
+        名前の検索<input type="text" id="chara_name">
         <button id="search">検索</button>
+        <p id="msg"></p>
     </div>
     <script type="text/javascript" src="./eel.js"></script>
     <script>
-        search.addEventListener('click', () =>{
-            eel.search(name.value, csv_name.value);
-            console.log('渡されました');
-        })
+        eel.expose(search)
+        function btnClick(){
+            search(chara_name.value, csv_name.value)
+        }
+        search.addEventListener('click', btnClick);
     </script>
 </body>
 </html>
