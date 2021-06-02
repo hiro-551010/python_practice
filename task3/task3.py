@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 
-@eel.expose
+
 def search(name, csv_name):
     path = os.path.join(os.path.dirname(__file__),csv_name)
     file = pd.read_csv(path)

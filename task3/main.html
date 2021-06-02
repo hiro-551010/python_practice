@@ -9,8 +9,8 @@
 </head>
 <body>
     <div class="container">
-        csvファイルの名前<input type="text" id="csv_name">
-        名前の検索<input type="text" id="chara_name">
+        csvファイルの名前<input type="text" id="csv_name" value="characters.csv">
+        名前の検索<input type="text" id="chara_name" value="炭治郎">
         <button id="search">検索</button>
         <p id="msg"></p>
     </div>
@@ -18,7 +18,8 @@
     <script>
         eel.expose(search)
         function btnClick(){
-            search(chara_name.value, csv_name.value)
+            // search(chara_name.value, csv_name.value);
+            console.log(chara_name.value, csv_name.value);
         }
         search.addEventListener('click', btnClick);
     </script>
