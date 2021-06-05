@@ -17,8 +17,13 @@
     <script type="text/javascript" src="./eel.js"></script>
     <script>
         search.addEventListener('click', () => {
-                eel.expose(search)(serch_word.value,csv_name.value);
+            eel.kimetu_search(chara_name.value, csv_name.value)
         })
+
+        eel.expose(log_js)
+        function log_js(text){
+            result.value += text + "\n"
+        }
 
     </script>
 </body>
