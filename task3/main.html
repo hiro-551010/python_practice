@@ -12,7 +12,7 @@
         csvファイルの名前<input type="text" id="csv_name" value="characters.csv">
         名前の検索<input type="text" id="chara_name" value="炭治郎">
         <input id="search" type="submit" value="検索">
-        <p id="msg"></p>
+        <textarea id="msg" class="log_js"></textarea>
     </div>
     <script type="text/javascript" src="./eel.js"></script>
     <script>
@@ -22,7 +22,7 @@
 
         eel.expose(log_js)
         function log_js(text){
-            result.value += text + "\n"
+            msg.value += text + "\n"
         }
 
     </script>
