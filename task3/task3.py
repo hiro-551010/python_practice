@@ -1,5 +1,5 @@
 import eel
-import chara_search
+import chara_search 
 
 @eel.expose
 def kimetu_search(chara_name, csv_name):
